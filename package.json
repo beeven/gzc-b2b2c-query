@@ -1,0 +1,7 @@
+{
+    "name": "GZC B2B2C Query",
+    "version": "0.0.1",
+    "dependencies":{
+        "express" : "~4.8.7"
+    }
+}
