@@ -1,5 +1,8 @@
-<div class="card">
-    <div class="card-content p10">
+<section>
+    <img src="images/bg.gif" class="img-responsive" alt=""/>
+</section>
+<section class="card">
+    <section class="card-content p10">
         <form name="queryForm" ng-model="queryData" ng-submit="query()">
             <section class="input-group mb5">
                 <input type="text" class="form-control flat-input input-lg mb5" name="phoneOrName"
@@ -16,15 +19,16 @@
                 <div class="alert alert-danger">输入的内容有误！</div>
             </section>
         </form>
-    </div>
-</div>
-<div class="card" ng-show="resultDataList.length>0">
-    <div class="card-header">
+    </section>
+</section>
+<section class="card" ng-show="resultDataList.length>0">
+    <section class="card-header">
         <div class="card-title">
             <h4>查询结果</h4>
         </div>
-    </div>
-    <div class="card-content">
+    </section>
+    <section class="card-content">
+        <div class="loader" ng-hide="resultDataList.length>0"></div>
         <div class="list-group">
             <div class="clearfix list-item" ng-repeat="item in resultDataList">
                 <!--<div class="fl width30">
@@ -58,5 +62,10 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+</section>
+<article>
+    <p class="p10 text-muted"><span class="glyphicon glyphicon-heart-empty mr5"></span>
+        本服务由广州海关12360提供，仅供查询在广州海关通关的跨境个人税单。
+        回复“跨境个人税单”可查看具体说明，同时您也可以直接 回复咨询问题进行人工咨询，我们在工作日将安排专人跟进您 的咨询建议。</p>
+</article>
