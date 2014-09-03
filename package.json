@@ -1,11 +1,13 @@
 {
-    "name": "gzc-b2b2c-query",
-    "version": "0.0.1",
-    "dependencies":{
-        "express" : "~4.8.7",
-        "q":">=1.0.1"
-    },
-    "devDependencies" : {
-
-    }
+  "name": "gzc-b2b2c-query",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "~4.8.7",
+    "q": ">=1.0.1"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-mocha-test": "^0.11.0",
+    "should": "^4.0.4"
+  }
 }
