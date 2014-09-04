@@ -1,9 +1,17 @@
 <section>
-    <img src="images/bg.gif"    class="img-responsive" alt=""/>
+    <img src="images/bg.gif" class="img-responsive" alt=""/>
 </section>
 <section class="card">
     <section class="card-content p10">
         <form name="queryForm" ng-model="queryData" ng-submit="query()">
+            <section class="input-group mb5">
+                <span class="input-group-addon">开始日期</span>
+                <input type="date" class="form-control flat-input" ng-model="queryData.startDate" required/>
+            </section>
+            <section class="input-group mb5">
+                <span class="input-group-addon">结束日期</span>
+                <input type="date" class="form-control flat-input" ng-model="queryData.endDate" required/>
+            </section>
             <section class="input-group mb5">
                 <input type="text" class="form-control flat-input input-lg mb5" name="phoneOrName"
                        ng-class="{'input-err':(queryForm.phoneOrName.$dirty&&queryForm.$invalid)}"
@@ -51,7 +59,7 @@
                         <span class="glyphicon glyphicon-stats mr5"></span>
                         <span class="text-muted">行邮税税额：{{item.post_sum}}</span>
                     </div>
-                    <div ng-hide="item.rateable_total==0">
+                    <div>
                         <span class="glyphicon glyphicon-credit-card mr5"></span>
                         <span class="text-muted">应征税额：{{item.rateable_total}}</span>
                     </div>
