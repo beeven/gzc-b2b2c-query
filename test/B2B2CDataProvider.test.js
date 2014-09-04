@@ -1,7 +1,7 @@
 /**
  * Created by Beeven on 9/3/2014.
  */
-var dataProvider = require("../B2B2CDummyDataProvider");
+var dataProvider = require("../B2B2C/B2B2CDummyDataProvider");
 
 describe("B2B2CDataProvider",function(){
 
@@ -20,7 +20,10 @@ describe("B2B2CDataProvider",function(){
             var ret = dataProvider.query("abc","2014-03-21","2014-09-20");
             ret.should.be.an.Object;
             ret.should.have.a.property("then");
-            done();
+            ret.then(function(data){
+                data.should.be.an.Array.with.a.property("length").which.is.above(0);
+                done();
+            });
         });
 
     });
