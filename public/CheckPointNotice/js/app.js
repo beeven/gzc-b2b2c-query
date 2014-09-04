@@ -11,20 +11,20 @@ var CheckpointNoticeApp = angular.module('CheckpointNoticeApp', [
     'NoticeControllers',
     'NoticeDirectives',
     'infinite-scroll'
-]).config(['$routeProvider','$locationProvider',function ($routeProvider, $locationProvider) {
+]).config(function ($routeProvider, $locationProvider) {
     $routeProvider.when("/:filter", {
         templateUrl: "partials/statusList.html"
     })
-    .otherwise({
-        templateUrl: "partials/statusList.html"
-    });
+        .otherwise({
+            templateUrl: "partials/statusList.html"
+        });
 
     //$locationProvider.html5Mode(true);
-}]);
+});
 
 var NoticeServices = angular.module("NoticeServices", []);
 var NoticeControllers = angular.module("NoticeControllers", ['NoticeServices']);
-var NoticeDirectives = angular.module("NoticeDirectives", []);
+var NoticeDirectives = angular.module("NoticeDirectives",[]);
 
 NoticeControllers.controller("MainController", ['$scope', '$http', '$routeParams', '$location', 'pollService', function ($scope, $http, $routeParams, $location, pollService) {
     var globalFilter = $routeParams.filter;
@@ -53,9 +53,12 @@ NoticeControllers.controller("MainController", ['$scope', '$http', '$routeParams
     });
 
 
+
+
+
     $scope.loadMoreItems = function () {
         $scope.busy = true;
-        pollService.fetch($scope.statusItems.length, globalFilter)
+        pollService.fetch($scope.statusItems.length,globalFilter)
             .then(function (data) {
                 $scope.statusItems = $scope.statusItems.concat(data);
                 $scope.busy = false;
@@ -65,7 +68,7 @@ NoticeControllers.controller("MainController", ['$scope', '$http', '$routeParams
     $scope.filterSubmit = function () {
         pollService.stop();
         if (!globalFilter) {
-            $location.path("/" + $scope.filterText);
+            $location.path("/" + $scope.filterText.toUpperCase());
         } else {
             $location.path("/");
         }
@@ -120,7 +123,7 @@ function PollService($q, $http, loopInterval) {
     this.fetch = function (index, filter) {
         var deferred = $q.defer();
         var params = null;
-        if (filter != null && typeof(filter) !== 'undefined') {
+        if(filter!=null && typeof(filter)!=='undefined') {
             params = {filter: filter};
         }
         $http.get("currentList/" + index, {params: params})
@@ -186,7 +189,7 @@ function PollService($q, $http, loopInterval) {
 }
 
 NoticeServices.provider("pollService", function PollingServiceProvider() {
-    var loopInterval = 10000;
+    var loopInterval = 20000;
     this.setLoopInterval = function (value) {
         loopInterval = parseInt(value);
     };
@@ -196,7 +199,7 @@ NoticeServices.provider("pollService", function PollingServiceProvider() {
     }];
 });
 
-NoticeDirectives.directive("loadingCircular", function () {
+NoticeDirectives.directive("loadingCircular",function(){
     return {
         restrict: 'AEC',
         template: '<div class="circular"></div><div class="circular"></div><div class="circular"></div><div class="circular"></div><div class="circular"></div><div class="circular"></div><div class="circular"></div><div class="circular"></div>'

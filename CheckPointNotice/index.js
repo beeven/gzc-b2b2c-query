@@ -4,7 +4,9 @@ var express = require("express"),
 
 var dp = new dataProvider();
 
-
+app.get("/",function(req,res){
+    res.redirect("/index.html");
+});
 app.get("/currentList/:index",function(req,res){
     var index = req.params.index;
     var filter = req.query.filter;
