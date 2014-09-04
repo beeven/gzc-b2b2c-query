@@ -4,7 +4,7 @@
 var express = require("express"),
     app = express.Router();
 
-var dataProvider = require("./B2B2CDummyDataProvider");
+var dataProvider = require("./B2B2CDataProvider");
 
 
 // query format: api/query/:id?start=2014-09-02&end=2014-09-03
