@@ -6,8 +6,11 @@
 angular.module('main.module', ['common.service.module'])
     .controller('mainController', ['$scope', 'queryService',
         function ($scope, queryService) {
+            var today = new Date();
             $scope.queryData = {
-                phoneOrName: ''
+                phoneOrName: '',
+                startDate: new Date(today.setMonth(today.getMonth() - 1)),
+                endDate: new Date()
             }
             $scope.resultDataList = [];
             $scope.query = function () {

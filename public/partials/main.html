@@ -5,6 +5,14 @@
     <section class="card-content p10">
         <form name="queryForm" ng-model="queryData" ng-submit="query()">
             <section class="input-group mb5">
+                <span class="input-group-addon">开始日期</span>
+                <input type="date" class="form-control flat-input" ng-model="queryData.startDate"/>
+            </section>
+            <section class="input-group mb5">
+                <span class="input-group-addon">结束日期</span>
+                <input type="date" class="form-control flat-input" ng-model="queryData.endDate"/>
+            </section>
+            <section class="input-group mb5">
                 <input type="text" class="form-control flat-input input-lg mb5" name="phoneOrName"
                        ng-class="{'input-err':(queryForm.phoneOrName.$dirty&&queryForm.$invalid)}"
                        ng-model="queryData.phoneOrName" ng-maxlength="18"
