@@ -36,37 +36,38 @@
         </div>
     </section>
     <section class="card-content">
-        <div class="loader" ng-hide="resultDataList.length>0"></div>
+        <!--<div class="loader" ng-hide="resultDataList.length>0"></div>-->
+        <div class="p10" ng-hide="resultDataList.length>0">
+            <div class="loader" ng-show="ListDataStatus=='loading'"></div>
+            <div ng-show="ListDataStatus=='none'">
+                <h5 class="text-muted">暂无数据</h5>
+            </div>
+        </div>
         <div class="list-group">
             <div class="clearfix list-item" ng-repeat="item in resultDataList">
-                <!--<div class="fl width30">
-                    <img src="images/5.jpg" class="img-responsive img-circle" alt=""/>
-                </div>-->
-                <div>
-                    <h4 class="text-danger">
-                        {{item.receiver_name}}
-                    </h4>
+                <h4 class="text-danger">
+                    {{item.receiver_name}}
+                </h4>
 
-                    <div>
-                        <span class="glyphicon glyphicon-pencil mr5"></span>
-                        <span class="text-muted mr10">个人税单号：{{item.tax_number}}</span>
-                    </div>
-                    <div>
-                        <span class="glyphicon glyphicon-list-alt mr5"></span>
-                        <span class="text-muted">计税物品总值：{{item.tax_total}}</span>
-                    </div>
-                    <div>
-                        <span class="glyphicon glyphicon-stats mr5"></span>
-                        <span class="text-muted">行邮税税额：{{item.post_sum}}</span>
-                    </div>
-                    <div>
-                        <span class="glyphicon glyphicon-credit-card mr5"></span>
-                        <span class="text-muted">应征税额：{{item.rateable_total}}</span>
-                    </div>
-                    <div>
-                        <span class="glyphicon glyphicon-time mr5"></span>
-                        <span class="text-muted">计税日期：{{item.taxable_date | date:'yyyy-MM-dd'}}</span>
-                    </div>
+                <div>
+                    <span class="glyphicon glyphicon-pencil mr5"></span>
+                    <span class="text-muted mr10">个人税单号：{{item.tax_number}}</span>
+                </div>
+                <div>
+                    <span class="glyphicon glyphicon-list-alt mr5"></span>
+                    <span class="text-muted">计税物品总值：{{item.tax_total}}</span>
+                </div>
+                <div>
+                    <span class="glyphicon glyphicon-stats mr5"></span>
+                    <span class="text-muted">行邮税税额：{{item.post_sum}}</span>
+                </div>
+                <div>
+                    <span class="glyphicon glyphicon-credit-card mr5"></span>
+                    <span class="text-muted">应征税额：{{item.rateable_total}}</span>
+                </div>
+                <div>
+                    <span class="glyphicon glyphicon-time mr5"></span>
+                    <span class="text-muted">计税日期：{{item.taxable_date | date:'yyyy-MM-dd'}}</span>
                 </div>
             </div>
         </div>
