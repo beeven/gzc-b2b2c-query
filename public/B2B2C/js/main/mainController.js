@@ -11,11 +11,18 @@ angular.module('main.module', ['common.service.module'])
                 phoneOrName: '',
                 startDate: new Date(today.setMonth(today.getMonth() - 1)),
                 endDate: new Date()
-            }
+            };
             $scope.resultDataList = [];
+            $scope.ListDataStatus = 'loading';
+
             $scope.query = function () {
+                $scope.ListDataStatus = 'loading';
                 queryService.query({id: $scope.queryData.phoneOrName}, function (result) {
-                    console.log(result)
+                    if (result.length > 0) {
+                        $scope.ListDataStatus = 'none'
+                    } else {
+                        $scope.ListDataStatus = 'done'
+                    }
                     $scope.resultDataList = result;
                 });
             }
