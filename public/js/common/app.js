@@ -14,11 +14,11 @@ angular.module("GZCApp", [
     .config(['$routeProvider',
         function ($routeProvider) {
             $routeProvider.when('/input', {
-                templateUrl: '/partials/main.html',
+                templateUrl: 'partials/main.html',
                 controller: 'mainController'
             })
             /*$routeProvider.when('/result', {
-                templateUrl: '/partials/dataList.html',
+                templateUrl: 'partials/dataList.html',
                 controller: 'resultController'
             })*/
             $routeProvider.otherwise({ redirectTo: '/input' });
