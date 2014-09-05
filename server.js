@@ -7,8 +7,7 @@ var express = require("express"),
     routes = require("./index"),
     http = require("http");
 
-app.set('port', process.env.PORT || 443);
-app.use(express.static(__dirname+"/public"));
+app.set('port', process.env.PORT || 3000);
 
 
 routes.setup(app);

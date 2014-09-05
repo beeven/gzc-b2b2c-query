@@ -2,7 +2,7 @@
  * Created by Beeven on 7/16/2014.
  */
 
-var dataSource = require("./oracleDataSource");
+var dataSource = require("./dummyDataSource");
 
 function dataProvider(pageSize, loopInterval) {
 

@@ -14,7 +14,7 @@ angular.module("GZCApp", [
     .config(['$routeProvider',
         function ($routeProvider) {
             $routeProvider.when('/input', {
-                templateUrl: '/partials/main.html',
+                templateUrl: 'partials/main.html',
                 controller: 'mainController'
             })
             /*$routeProvider.when('/result', {

@@ -1,10 +1,10 @@
-/**
+﻿/**
  * Created by Beeven on 9/4/2014.
  */
 var express = require("express"),
     app = express.Router();
 
-var dataProvider = require("./B2B2CDataProvider");
+var dataProvider = require("./B2B2CDummyDataProvider");
 
 
 // query format: api/query/:id?start=2014-09-02&end=2014-09-03
