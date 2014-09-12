@@ -47,18 +47,20 @@ angular.module("GZCApp", [
                     case 'Data':
                         break;
                     default:
-                        $scope.ActivedValue = $scope.NavObj[0].Value;
+                        $scope.ActivatedValue = $scope.NavObj[0].Value;
                         break;
                 }
             }
             $scope.ChangeList();
 
             $scope.fixedTop = false;
-            function pinNav() {
+            function navFixedToggle() {
                 document.addEventListener('scroll', ScrollHandle, false);
                 var navigate = document.getElementById('navigate'),
                     navFixedTop,
                     navFixedBottom,
+                    navigatePrototypeClass = navigate.className,
+                    isNavFixed = false,
                     isFirstScroll = false;
 
                 function ScrollHandle() {
@@ -70,19 +72,21 @@ angular.module("GZCApp", [
                         isFirstScroll = true;
                     }
                     var offsetTop = document.body.scrollTop;
-
-                    $scope.$apply(function(){
-                        if (offsetTop > navFixedTop) {
-                            $scope.fixedTop = true;
-                        }
-                        if (offsetTop < navFixedBottom) {
-                            $scope.fixedTop = false;
-                        }
-                    });
+                    if (offsetTop >= navFixedTop) {
+                        $scope.fixedTop = true;
+                        //isNavFixed = true;
+                        //navigate.className += ' navbar-fixed-top';
+                    }
+                    if (offsetTop <= navFixedBottom) {
+                        $scope.fixedTop = false;
+                        //isNavFixed = false;
+                        //navigate.className = navigatePrototypeClass;
+                    }
+                    $scope.$digest();
                 }
 
                 function getNavigateOffsetTop() {
-                    return navigate.offsetTop - 1;
+                    return navigate.offsetTop;
                 }
 
                 function getNavigateOffsetBottom() {
@@ -90,7 +94,7 @@ angular.module("GZCApp", [
                 }
             }
 
-            pinNav();
+            navFixedToggle();
 
             $scope.query = function () {
                 $scope.showList = true;
@@ -103,8 +107,29 @@ angular.module("GZCApp", [
                     }
                     $scope.resultDataList = result;
                 });
-            }
+            };
+        }
+    ])
 
+    .directive('fixedTopNavBar', [
+        function () {
+            return {
+                restrict: 'AE',
+                require: '?ngModel',
+                replace: false,
+                scope: {
+                    ObjectHasCustomInfo: '=ngModel',
+                    save: '&',
+                    isEditDetail: '=',
+                    onGetEventDone: '@'
+                },
+                controller: ['$scope', function ($scope) {
+
+                }],
+                link: function (scope, element, attr) {
+
+                }
+            }
         }
     ])
 

@@ -3,9 +3,9 @@
  */
 
 var b2b2c = require("./B2B2C");
-var checkPointNotice = require("./CheckPointNotice");
+//var checkPointNotice = require("./CheckPointNotice");
 
 exports.setup = function(app) {
     app.use("/B2B2C",b2b2c.routes);
-    app.use("/CheckPointNotice",checkPointNotice.routes);
+    //app.use("/CheckPointNotice",checkPointNotice.routes);
 };

@@ -51,6 +51,42 @@ function makeData(name,id){
             post_sum: 19.42, // 行邮税税额
             rateable_total: 0, // 应征税额
             taxable_date: new Date("2014-08-29") // 计税日期
+        },
+        {
+            receiver_name: name, // 收件人名称
+            receiver_id: id,
+            tax_number: null, // 个人税单号，应征税额为0时，此处 null
+            tax_total: 194.20, // 计税物品总值
+            post_sum: 19.42, // 行邮税税额
+            rateable_total: 0, // 应征税额
+            taxable_date: new Date("2014-08-29") // 计税日期
+        },
+        {
+            receiver_name: name, // 收件人名称
+            receiver_id: id,
+            tax_number: null, // 个人税单号，应征税额为0时，此处 null
+            tax_total: 194.20, // 计税物品总值
+            post_sum: 19.42, // 行邮税税额
+            rateable_total: 0, // 应征税额
+            taxable_date: new Date("2014-08-29") // 计税日期
+        },
+        {
+            receiver_name: name, // 收件人名称
+            receiver_id: id,
+            tax_number: null, // 个人税单号，应征税额为0时，此处 null
+            tax_total: 194.20, // 计税物品总值
+            post_sum: 19.42, // 行邮税税额
+            rateable_total: 0, // 应征税额
+            taxable_date: new Date("2014-08-29") // 计税日期
+        },
+        {
+            receiver_name: name, // 收件人名称
+            receiver_id: id,
+            tax_number: null, // 个人税单号，应征税额为0时，此处 null
+            tax_total: 194.20, // 计税物品总值
+            post_sum: 19.42, // 行邮税税额
+            rateable_total: 0, // 应征税额
+            taxable_date: new Date("2014-08-29") // 计税日期
         }
     ];
 }
