@@ -4,17 +4,6 @@
 
 'use strict';
 angular.module('common.service.module', [])
-    .factory('fetchDataService', ['$resource',
-        function ($resource) {
-            return $resource('api/fetchData/:action', {}, {
-                fetch: { method: 'POST', params: {action: 'fetch'}, isArray: false },
-                query: { method: 'GET', params: {action: 'query'}, isArray: false },
-                save: { method: 'POST', params: {action: 'save'} },
-                destroy: { method: 'POST', params: {action: 'destroy'} }
-            })
-        }
-    ])
-
     .factory('SelectHelper', [
         function () {
             return function () {

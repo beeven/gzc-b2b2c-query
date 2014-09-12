@@ -1,3 +1,8 @@
+<style>
+    .navFixedOffset{
+        margin-top: 50px;
+    }
+</style>
 <section>
     <img src="images/bg.gif" class="img-responsive" alt=""/>
 </section>
@@ -29,50 +34,60 @@
         </form>
     </section>
 </section>
-<section class="card" ng-show="resultDataList.length>0">
-    <section class="card-header">
-        <div class="card-title">
-            <h4>查询结果</h4>
-        </div>
-    </section>
-    <section class="card-content">
-        <!--<div class="loader" ng-hide="resultDataList.length>0"></div>-->
-        <div class="p10" ng-hide="resultDataList.length>0">
-            <div class="loader" ng-show="ListDataStatus=='loading'"></div>
-            <div ng-show="ListDataStatus=='none'">
-                <h5 class="text-muted">暂无数据</h5>
+<div class="result" ng-show="showList">
+    <section class="card">
+        <section class="card-header">
+            <div class="card-title">
+                <h4>查询结果</h4>
             </div>
-        </div>
-        <div class="list-group">
-            <div class="clearfix list-item" ng-repeat="item in resultDataList">
-                <h4 class="text-danger">
-                    {{item.receiver_name}}
-                </h4>
+        </section>
+        <section class="card-nav">
+            <ul class="nav nav-tabs width100" id="navigate" ng-class="{'navbar-fixed-top':fixedTop}">
+                <li ng-repeat="item in NavObj"
+                    ng-click="ChangeList(item.Value)"
+                    ng-class="{'active':ActivedValue==item.Value}">
+                    <a href="" style="font-size: 16px;padding: 10px 30px;">{{item.DisplayName}}</a>
+                </li>
+            </ul>
+        </section>
+        <section class="card-content" ng-class="{'navFixedOffset':fixedTop}">
+            <div class="p10" ng-hide="resultDataList.length>0">
+                <div class="loader" ng-show="ListDataStatus=='loading'"></div>
+                <div ng-show="ListDataStatus=='none'">
+                    <h5 class="text-muted">暂无数据</h5>
+                </div>
+            </div>
+            <div class="list-group">
+                <div class="clearfix list-item" ng-repeat="item in resultDataList">
+                    <h4 class="text-danger">
+                        {{item.receiver_name}}
+                    </h4>
 
-                <div>
-                    <span class="glyphicon glyphicon-pencil mr5"></span>
-                    <span class="text-muted mr10">个人税单号：{{item.tax_number}}</span>
-                </div>
-                <div>
-                    <span class="glyphicon glyphicon-list-alt mr5"></span>
-                    <span class="text-muted">计税物品总值：{{item.tax_total}}</span>
-                </div>
-                <div>
-                    <span class="glyphicon glyphicon-stats mr5"></span>
-                    <span class="text-muted">行邮税税额：{{item.post_sum}}</span>
-                </div>
-                <div>
-                    <span class="glyphicon glyphicon-credit-card mr5"></span>
-                    <span class="text-muted">应征税额：{{item.rateable_total}}</span>
-                </div>
-                <div>
-                    <span class="glyphicon glyphicon-time mr5"></span>
-                    <span class="text-muted">计税日期：{{item.taxable_date | date:'yyyy-MM-dd'}}</span>
+                    <div>
+                        <span class="glyphicon glyphicon-pencil text-muted mr5"></span>
+                        <span class="text-muted mr10">个人税单号：{{item.tax_number}}</span>
+                    </div>
+                    <div>
+                        <span class="glyphicon glyphicon-list-alt text-muted mr5"></span>
+                        <span class="text-muted">计税物品总值：{{item.tax_total}}</span>
+                    </div>
+                    <div>
+                        <span class="glyphicon glyphicon-stats text-muted mr5"></span>
+                        <span class="text-muted">行邮税税额：{{item.post_sum}}</span>
+                    </div>
+                    <div ng-hide="item.rateable_total==0">
+                        <span class="glyphicon glyphicon-credit-card text-muted mr5"></span>
+                        <span class="text-muted">应征税额：{{item.rateable_total}}</span>
+                    </div>
+                    <div>
+                        <span class="glyphicon glyphicon-time text-muted mr5"></span>
+                        <span class="text-muted">计税日期：{{item.taxable_date | date:'yyyy-MM-dd'}}</span>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     </section>
-</section>
+</div>
 <article>
     <p class="p10 text-muted"><span class="glyphicon glyphicon-heart-empty mr5"></span>
         本服务由广州海关12360提供，仅供查询在广州海关通关的跨境个人税单。

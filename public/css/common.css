@@ -8,28 +8,32 @@ input[type="date"], input[type="datetime"], input[type="time"] {
     -webkit-appearance: none;
     -moz-appearance: none;
 }
-
-a {
-    color: #4482c2;
+.flat-input,
+.form-control {
+    border: 2px solid #DDD;
+    color: #34495e;
+    text-indent: 1px;
+    padding-left: 3px;
+    padding-right: 3px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
-
-a:hover {
-    color: #d51e56;
-    text-decoration: none;
+.flat-input.no-border,
+.form-control.no-border {
+    border: 2px solid #FFF;
 }
-
-.link-black a {
-    color: #666 !important;
+.flat-input:hover,
+.form-control:hover {
+    border: 2px solid #CCC;
 }
-
-.link-black a:hover {
-    color: #4482c2 !important;
+.flat-input:focus,
+.form-control:focus {
+    border-color: #4482c2;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
-
-.no-under-text a {
-    text-decoration: none;
-}
-
 .pl5 {
     padding-left: 5px;
 }

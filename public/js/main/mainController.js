@@ -29,11 +29,6 @@ angular.module('main.module', ['common.service.module'])
 
         }
     ])
-    /*.controller('resultController', ['$scope',
-     function ($scope) {
-
-     }
-     ])*/
     .factory('queryService', ['$resource',
         function ($resource) {
             return $resource('api/:action/:id', {}, {
