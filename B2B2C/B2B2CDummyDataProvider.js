@@ -99,7 +99,7 @@ function makeData(id){
 }
 
 
-exports.query = function(criterion,startDate,endDate) {
+exports.query = function(criterion) {
 
     var data = makeData(criterion);
 

@@ -1,7 +1,7 @@
 /**
  * Created by Beeven on 9/3/2014.
  */
-var dataProvider = require("../../B2B2C/B2B2CDummyDataProvider");
+var dataProvider = require("../../B2B2C/B2B2CDataProvider");
 
 describe("B2B2CDataProvider",function(){
 
@@ -12,12 +12,12 @@ describe("B2B2CDataProvider",function(){
     });
 
     describe("B2B2CDataProvider.query",function(){
-        it("should have 3 arguments",function(){
-            dataProvider.query.should.have.lengthOf(3);
+        it("should have 1 arguments",function(){
+            dataProvider.query.should.have.lengthOf(1);
         });
 
         it("should return a promise if invoked",function(done){
-            var ret = dataProvider.query("abc","2014-03-21","2014-09-20");
+            var ret = dataProvider.query("abc");
             ret.should.be.an.Object;
             ret.should.have.a.property("then");
             ret.then(function(data){
@@ -27,4 +27,5 @@ describe("B2B2CDataProvider",function(){
         });
 
     });
+
 });
