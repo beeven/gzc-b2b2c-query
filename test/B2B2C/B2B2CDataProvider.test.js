@@ -8,7 +8,7 @@ describe("B2B2CDataProvider",function(){
 
     it("should have a method naming query",function(){
         dataProvider.should.have.a.property("query");
-        dataProvider.query.should.be.a.Function;
+        dataProvider.query.should.be.an.instanceOf(Function);
     });
 
     describe("B2B2CDataProvider.query",function(){
@@ -17,13 +17,15 @@ describe("B2B2CDataProvider",function(){
         });
 
         it("should return a promise if invoked",function(done){
-            var ret = dataProvider.query("abc");
-            ret.should.be.an.Object;
-            ret.should.have.a.property("then");
-            ret.then(function(data){
-                data.should.be.an.Array.with.a.property("length").which.is.above(0);
-                done();
-            });
+            dataProvider.query("310103198209244043")
+                .then(function(data){
+                    data.should.be.an.Array.with.a.property("length").which.is.above(0);
+                    done();
+                })
+                .fail(function(err){
+                    console.error(err);
+                    done();
+                })
         });
 
     });

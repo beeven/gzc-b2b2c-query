@@ -10,8 +10,8 @@ var config = {
     hostname: '10.53.1.194',
     port: 1521,
     database: "ZNHG",
-    user: "kjecsel",
-    password: "kjecsel"
+    user: "kjeccus",
+    password: "dbwork"
 };
 
 function GroupTaxBill(items) {
@@ -63,7 +63,11 @@ exports.query = function(criterion){
     var start = Date.parse(startDate);
     var end = Date.parse(endDate);
     */
+    if(!/[a-zA-Z0-9]{13}/.test(criterion)){
+        throw "Not valid id format";
+    }
 
+    /*
     var queryString = 'select ORDERDOCID as "receiver_id", ' +
         'CHILDORDERNO as "order_id", ' +
         'TRANSPORT_NO as "freight_id", ' +
@@ -73,9 +77,19 @@ exports.query = function(criterion){
         'PRINT_DATE as "date_of_issue", ' +
         'TAX_NUMBER as "tax_bill_id" ' +
         'from KJECCUS.V_EBILL_FOR_WECHAT ' +
-        'where ORDERDOCID = (:1) ';
-
-    var parameters = [criterion];
+        'where ORDERDOCID = \''+criterion+'\' ';
+     */
+    var queryString = 'select b."LIST_NO" ' +
+        ",'' as transport_no "+
+        ',b."CHILDORDERNO" ' +
+        ',b."ORDERDOCID" ' +
+        ',b."EBSTATUS" ' +
+        ',b."HANDLE_DATE" ' +
+        ',t.tax_number ' +
+        ',t.rateable_total ' +
+        ',t.print_date ' +
+        'from v_ebill b left join v_ebill_tax t on b.list_no = t.list_no';
+    //var parameters = [criterion];
 /*
     if(!!start && !end) {
         queryString += "and PRINT_DATE >= (:3) ";
@@ -91,8 +105,9 @@ exports.query = function(criterion){
         parameters.push(end);
     }
 */
-    queryString += "order by nvl(PRINT_DATE,HANDLE_DATE) desc";
+    //queryString += "order by nvl(PRINT_DATE,HANDLE_DATE) desc";
 
+    console.log(queryString);
     var deferred = Q.defer();
 
     oracle.connect(config,function(err,connection){
@@ -103,7 +118,7 @@ exports.query = function(criterion){
 
         connection.execute(
             queryString,
-            parameters,
+            [],
             function(err, results){
                 if(err) {
                     console.error("Error executing query: ",err);
