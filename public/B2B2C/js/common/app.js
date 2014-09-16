@@ -449,7 +449,7 @@ angular.module("template/accordion/accordion-group.html", []).run(["$templateCac
             "      <a class=\"accordion-toggle\" ng-click=\"toggleOpen()\" accordion-transclude=\"heading\" style='display: block;'>" +
             "       <span ng-class=\"{'text-muted': isDisabled}\">{{heading}}</span></a>\n" +
             "    </h4>\n" +
-            "    <span class=\"ps10 text-muted\">{{subHeading}}</span>" +
+            "    <span ng-if=\"!!subHeading\" class=\"ps10 text-muted\">{{subHeading}}</span>" +
             "    </div>\n" +
             "  </div>\n" +
             "  <div class=\"panel-collapse\" collapse=\"!isOpen\">\n" +

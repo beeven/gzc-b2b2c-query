@@ -301,7 +301,9 @@ input[type="date"], input[type="datetime"], input[type="time"] {
     border-color: #4482c2 !important;
     color: #4482c2 !important;
 }
-
+.card-header{
+    position: relative;
+}
 .card-header .card-title {
     border-bottom: 1px solid #DDD;
 }
@@ -320,7 +322,7 @@ input[type="date"], input[type="datetime"], input[type="time"] {
     padding: 10px 10px;
     color: #666;
     margin-top: 5px;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
 }
 
 .card-header .card-title:after,
@@ -334,7 +336,7 @@ input[type="date"], input[type="datetime"], input[type="time"] {
 }
 
 .card-content {
-    overflow-y: auto;
+    /*overflow-y: auto;*/
 }
 
 .list-group,
