@@ -2,7 +2,9 @@ body {
     font-family: Helvetica Neue, Microsoft Yahei !important;
     background-color: #EEE;
 }
-
+a:hover{
+    text-decoration: none;
+}
 input[type="date"], input[type="datetime"], input[type="time"] {
     line-height: 20px;
     -webkit-appearance: none;
@@ -316,7 +318,6 @@ input[type="date"], input[type="datetime"], input[type="time"] {
 .card-header .card-title h4,
 .card-header .card-title h6 {
     padding: 10px 10px;
-    float: left;
     color: #666;
     margin-top: 5px;
     margin-bottom: 0px;
