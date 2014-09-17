@@ -36,7 +36,7 @@
 </section>
 <div class="result" ng-show="showList" accordion close-others="false">
     <section class="card" ng-repeat="item in resultDataList"
-             ng-init="!!item.tax_bill_id?item.status.open=false:item.status.open=true"
+             ng-init="item.status.open=true"
              accordion-group is-open="item.status.open">
         <header accordion-heading>
             税单号&nbsp;{{!!item.tax_bill_id?item.tax_bill_id:'无'}}
