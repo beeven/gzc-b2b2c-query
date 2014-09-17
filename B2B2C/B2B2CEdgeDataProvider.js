@@ -2,10 +2,10 @@ var edge = require("edge");
 var Q = require("q");
 
 var csquery = edge.func({
-    //source: require("path").join(__dirname,"query.cs"),
-    assemblyFile: "query.dll",
-    typeName: "Startup",
-    methodName: "Invoke",
+    source: require("path").join(__dirname,"B2B2CEdgeDataProvider.cs"),
+    //assemblyFile: "B2B2CEdgeDataProvider.dll",
+    //typeName: "Startup",
+    //methodName: "Invoke",
     references: ['System.Data.dll','System.Data.OracleClient.dll']
 });
 
