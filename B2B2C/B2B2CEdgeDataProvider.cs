@@ -69,7 +69,7 @@ static class Helper
                             orders = new List<Order>() 
                         });
                     }
-                    TaxBill tb = groups[(string)reader[7]];
+                    TaxBill tb = groups[tax_bill_id];
                     tb.orders.Add(new Order()
                     {
                         order_id = reader["order_id"] as string,
@@ -82,12 +82,12 @@ static class Helper
                 {
                     results.Add(new TaxBill()
                     {
-                        date_of_issue = reader[4] as DateTime?,
+                        date_of_issue = reader["date_of_issue"] as DateTime?,
                         orders = new List<Order>() { new Order() { 
-                            order_id = reader[1] as string,
-                            freight_id = reader[2] as string,
-                            status = reader[5] as string,
-                            last_updated = reader[4] as DateTime?
+                            order_id = reader["order_id"] as string,
+                            freight_id = reader["freight_id"] as string,
+                            status = reader["status"] as string,
+                            last_updated = reader["last_updated"] as DateTime?
                         } }
                     });
                 }
