@@ -8,7 +8,7 @@ using System.Data.OracleClient;
 public class TaxBill
 {
     public string tax_bill_id;
-    public string tax_total;
+    public Decimal tax_total;
     public DateTime? date_of_issue;
     public List<Order> orders;
 }
@@ -65,7 +65,7 @@ static class Helper
                         groups.Add(tax_bill_id, new TaxBill() {
                             tax_bill_id = tax_bill_id,
                             date_of_issue = reader["date_of_issue"] as DateTime?,
-                            tax_total = reader["tax_total"] as String ,
+                            tax_total = (Decimal)reader["tax_total"],
                             orders = new List<Order>() 
                         });
                     }
