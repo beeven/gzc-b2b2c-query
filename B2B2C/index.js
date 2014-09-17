@@ -4,7 +4,7 @@
 var express = require("express"),
     app = express.Router();
 
-var dataProvider = require("./B2B2CDummyDataProvider");
+var dataProvider = require("./B2B2CEdgeDataProvider");
 
 // query format: api/query/:id?start=2014-09-02&end=2014-09-03
 // id: 身份证号/姓名
