@@ -27,7 +27,7 @@ angular.module("GZCApp", [
         function ($scope, queryService) {
             var today = new Date();
             $scope.queryData = {
-                phoneOrName: 'default data',
+                phoneOrName: '',
                 startDate: new Date(today.setMonth(today.getMonth() - 1)),
                 endDate: new Date()
             };
@@ -53,49 +53,6 @@ angular.module("GZCApp", [
                 }
             }
             $scope.ChangeList();
-
-            /*$scope.fixedTop = false;
-             function navFixedToggle() {
-             document.addEventListener('scroll', ScrollHandle, false);
-             var navigate = document.getElementById('navigate'),
-             navFixedTop,
-             navFixedBottom,
-             isNavFixed = false,
-             isFirstScroll = false;
-
-             function ScrollHandle() {
-             if (!isFirstScroll) {
-             $scope.navigateHeight = navigate.offsetHeight;
-
-             navFixedTop = getNavigateOffsetTop();
-             navFixedBottom = getNavigateOffsetBottom();
-             isFirstScroll = true;
-             }
-             var offsetTop = document.body.scrollTop;
-             if (offsetTop >= navFixedTop) {
-             $scope.fixedTop = true;
-             //isNavFixed = true;
-             //navigate.className += ' navbar-fixed-top';
-             }
-             if (offsetTop <= navFixedBottom) {
-             $scope.fixedTop = false;
-             //isNavFixed = false;
-             //navigate.className = navigatePrototypeClass;
-             }
-             $scope.$digest();
-             }
-
-             function getNavigateOffsetTop() {
-             return navigate.offsetTop;
-             }
-
-             function getNavigateOffsetBottom() {
-             return navigate.offsetTop;
-             }
-             }
-
-             navFixedToggle();*/
-
             $scope.query = function () {
                 $scope.showList = true;
                 $scope.ListDataStatus = 'loading';
@@ -109,7 +66,7 @@ angular.module("GZCApp", [
                     $scope.resultDataList = result;
                 });
             };
-            $scope.query();
+            //$scope.query();
         }
     ])
 
