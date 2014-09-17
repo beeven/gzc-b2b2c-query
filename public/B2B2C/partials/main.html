@@ -64,7 +64,7 @@
                 </div>
                 <div ng-hide="item.rateable_total==0">
                     <span class="glyphicon glyphicon-credit-card text-muted mr5"></span>
-                    <span class="text-muted">货运号：{{order.freight_id}}</span>
+                    <span class="text-muted">货运号：{{!!order.freight_id?order.freight_id:"无"}}</span>
                 </div>
                 <div>
                     <span class="glyphicon glyphicon-time text-muted mr5"></span>
