@@ -35,7 +35,8 @@
     </section>
 </section>
 <div class="result" ng-show="showList" accordion close-others="false">
-    <section class="card" ng-repeat="item in resultDataList" ng-if="!!item.tax_bill_id"
+    <section class="card" ng-repeat="item in resultDataList"
+             ng-init="!!item.tax_bill_id?item.status.open=false:item.status.open=true"
              accordion-group is-open="item.status.open">
         <header accordion-heading>
             税单号&nbsp;{{!!item.tax_bill_id?item.tax_bill_id:'无'}}
@@ -43,7 +44,9 @@
                   ng-class="{'glyphicon-chevron-down': item.status.open, 'glyphicon-chevron-right': !item.status.open}"></span>
         </header>
         <div class="list-group">
-            <div class="toolbar p10" style="border-bottom: 1px solid #DDD;background-color: #f7f7f7;">征税额：{{item.tax_total}}</div>
+            <div class="toolbar p10" style="border-bottom: 1px solid #DDD;background-color: #f7f7f7;">
+                征税额：{{item.tax_total}}
+            </div>
             <div class="clearfix list-item p15" ng-repeat="order in item.orders">
                 <div>
                     <span class="glyphicon glyphicon-list-alt text-muted mr5"></span>
