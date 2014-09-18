@@ -23,15 +23,17 @@ public class Order
 
 public class Startup
 {
-    public async Task<object> Invoke(object input, object start, object end)
+    public async Task<object> Invoke(dynamic input)
     {
-        string criterion = (string)input;
+        string criterion = (string)input.criterion;
+        string start = (string)input.startDate;
+        string end = (string)input.endDate;
         DateTime startDate, endDate;
-        if (!DateTime.TryParse((string)start, out startDate))
+        if (!DateTime.TryParse(start, out startDate))
         {
             startDate = DateTime.Now.Subtract(TimeSpan.FromDays(30));
         }
-        if(!DateTime.TryParse((string)end, out endDate))
+        if(!DateTime.TryParse(end, out endDate))
         {
             endDate = DateTime.Now;
         }
@@ -65,8 +67,8 @@ static class Helper
                      "order by HANDLE_DATE desc";
             dbcmd.CommandText = sql;
             dbcmd.Parameters.Add(new OracleParameter("criterion", criterion));
-            dbcmd.Parameters.AddWithValue("startDate", startDate);
-            dbcmd.Parameters.AddWithValue("endDate", endDate);
+            dbcmd.Parameters.Add(new OracleParameter("startDate", startDate));
+            dbcmd.Parameters.Add(new OracleParameter("endDate", endDate));
             OracleDataReader reader = dbcmd.ExecuteReader();
             while(await reader.ReadAsync())
             {
@@ -108,8 +110,16 @@ static class Helper
             reader.Close();
             dbcmd.Dispose();
 
+            foreach(var tb in groups.Values)
+            {
+                if(tb.date_of_issue == null)
+                {
+                    tb.date_of_issue = tb.orders.Max(x=>x.last_updated);
+                }
+            }
+
             results.AddRange(groups.Values);
-            return results.OrderBy(x=>x.date_of_issue).ToArray();
+            return results.OrderByDescending(x=>x.date_of_issue).ToArray();
         }
     }
 }
@@ -118,12 +128,12 @@ class Program
     static void Main(string[] args)
     {
         //var t = Helper.Query("320981198706300469",DateTime.Now.Subtract(TimeSpan.FromDays(30)),DateTime.Now);
-        var t = Helper.Query("320981198706300469",DateTime.Now.Subtract(TimeSpan.FromDays(30)),DateTime.Now);
+        var t = Helper.Query("320981198706300469",DateTime.Now.Subtract(TimeSpan.FromDays(180)),DateTime.Now);
         t.Wait();
         var results = t.Result;
         foreach(var r in results)
         {
-            Console.WriteLine("Tax_Bill_Id: {0} \t Orders: {1}", r.tax_bill_id, r.orders.Count);
+            Console.WriteLine("Tax_Bill_Id: {0} \t Orders: {1} \t DateOfIssue: {2}", r.tax_bill_id, r.orders.Count, r.date_of_issue);
         }
     }
 }

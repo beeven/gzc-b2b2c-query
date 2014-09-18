@@ -10,9 +10,13 @@ var csquery = edge.func({
 });
 
 
-exports.query = function(criterion){
+exports.query = function(criterion,startDate,endDate){
     var deferred = Q.defer();
-    csquery(criterion,function(err,results){
+    csquery({
+        criterion: criterion,
+        startDate: startDate,
+        endDate: endDate
+    },function(err,results){
         if(err) {
             console.error(err);
             deferred.reject(err);

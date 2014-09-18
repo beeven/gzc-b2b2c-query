@@ -15,6 +15,8 @@ app.get("/api/query/:id", function (req, res) {
     var startDate = req.query.start;
     var endDate = req.query.end;
 
+    console.log("Id: %s\t StartDate: %s\t EndDate: %s",id,startDate,endDate);
+
     dataProvider.query(id, startDate, endDate)
         .then(function (data) {
             res.json(data);

@@ -56,7 +56,11 @@ angular.module("GZCApp", [
             $scope.query = function () {
                 $scope.showList = true;
                 $scope.ListDataStatus = 'loading';
-                queryService.query({id: $scope.queryData.phoneOrName}, function (result) {
+                queryService.query({
+                    id: $scope.queryData.phoneOrName,
+                    start: $scope.queryData.startDate,
+                    end: $scope.queryData.endDate
+                }, function (result) {
                     console.log(result)
                     if (result.length > 0) {
                         $scope.ListDataStatus = 'none'
