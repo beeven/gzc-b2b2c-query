@@ -23,20 +23,30 @@ public class Order
 
 public class Startup
 {
-    public async Task<object> Invoke(object input)
+    public async Task<object> Invoke(object input, object start, object end)
     {
         string criterion = (string)input;
-        return await Helper.Query(criterion);
+        DateTime startDate, endDate;
+        if (!DateTime.TryParse((string)start, out startDate))
+        {
+            startDate = DateTime.Now.Subtract(TimeSpan.FromDays(30));
+        }
+        if(!DateTime.TryParse((string)end, out endDate))
+        {
+            endDate = DateTime.Now;
+        }
+        
+        return await Helper.Query(criterion,startDate,endDate);
     }
 }
 
 static class Helper
 {
     static string connecitonString = "Data Source=10.53.1.194/ZNHG;User ID=kjecsel;Password=kjecsel;";
-    public static async Task<TaxBill[]> Query(string criterion)
+    public static async Task<TaxBill[]> Query(string criterion, DateTime startDate, DateTime endDate)
     {
-        OracleConnection dbcon = new OracleConnection(connecitonString);
-        
+        using(OracleConnection dbcon = new OracleConnection(connecitonString))
+        {
             Dictionary<String, TaxBill> groups = new Dictionary<string, TaxBill>();
             List<TaxBill> results = new List<TaxBill>();
             await dbcon.OpenAsync();
@@ -51,9 +61,12 @@ static class Helper
                      "TAX_NUMBER as \"tax_bill_id\" " +
                      "from KJECCUS.V_EBILL_FOR_WECHAT " +
                      "where ORDERDOCID = :criterion "+
+                     "and ( HANDLE_DATE is null or HANDLE_DATE between :startDate and :endDate )"+
                      "order by HANDLE_DATE desc";
             dbcmd.CommandText = sql;
             dbcmd.Parameters.Add(new OracleParameter("criterion", criterion));
+            dbcmd.Parameters.AddWithValue("startDate", startDate);
+            dbcmd.Parameters.AddWithValue("endDate", endDate);
             OracleDataReader reader = dbcmd.ExecuteReader();
             while(await reader.ReadAsync())
             {
@@ -65,11 +78,11 @@ static class Helper
                         groups.Add(tax_bill_id, new TaxBill() {
                             tax_bill_id = tax_bill_id,
                             date_of_issue = reader["date_of_issue"] as DateTime?,
-                            tax_total = (Decimal)reader["tax_total"],
+                            tax_total = (Decimal)reader["tax_total"] ,
                             orders = new List<Order>() 
                         });
                     }
-                    TaxBill tb = groups[tax_bill_id];
+                    TaxBill tb = groups[(string)reader[7]];
                     tb.orders.Add(new Order()
                     {
                         order_id = reader["order_id"] as string,
@@ -82,7 +95,7 @@ static class Helper
                 {
                     results.Add(new TaxBill()
                     {
-                        date_of_issue = reader["date_of_issue"] as DateTime?,
+                        date_of_issue = reader["last_updated"] as DateTime?,
                         orders = new List<Order>() { new Order() { 
                             order_id = reader["order_id"] as string,
                             freight_id = reader["freight_id"] as string,
@@ -93,22 +106,19 @@ static class Helper
                 }
             }
             reader.Close();
-            reader = null;
             dbcmd.Dispose();
-            dbcmd = null;
-            dbcon.Close();
-            dbcon = null;
 
             results.AddRange(groups.Values);
             return results.OrderBy(x=>x.date_of_issue).ToArray();
-        
+        }
     }
 }
 class Program
 {
     static void Main(string[] args)
     {
-        var t = Helper.Query("320981198706300469");
+        //var t = Helper.Query("320981198706300469",DateTime.Now.Subtract(TimeSpan.FromDays(30)),DateTime.Now);
+        var t = Helper.Query("320981198706300469",DateTime.Now.Subtract(TimeSpan.FromDays(30)),DateTime.Now);
         t.Wait();
         var results = t.Result;
         foreach(var r in results)
@@ -117,3 +127,4 @@ class Program
         }
     }
 }
+
