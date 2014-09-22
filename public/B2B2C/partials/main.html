@@ -21,7 +21,7 @@
                 <input type="text" class="form-control flat-input input-lg mb5" name="phoneOrName"
                        ng-class="{'input-err':(queryForm.phoneOrName.$dirty&&queryForm.$invalid)}"
                        ng-model="queryData.phoneOrName" ng-maxlength="18"
-                       ng-pattern="/^[0-9]{0,19}$/"
+                       ng-pattern="/^[0-9A-Za-z]{0,19}$/"
                        placeholder="请输入身份证号" required/>
                 <span class="input-group-btn">
                     <input class="btn btn-primary width100 input-lg" type="submit" value="查询"
@@ -129,6 +129,6 @@
 </div>
 <article>
     <p class="p10 text-muted"><span class="glyphicon glyphicon-heart-empty mr5"></span>
-        本服务由广州海关12360提供，仅供查询在广州海关通关的跨境个人税单。
-        回复“跨境个人税单”可查看具体说明，同时您也可以直接 回复咨询问题进行人工咨询，我们在工作日将安排专人跟进您 的咨询建议。</p>
+    本服务由广州海关12360提供，仅供查询在广州海关通关的跨境个人税单。</p>
+    <!--<p>回复“跨境个人税单”可查看具体说明，同时您也可以直接 回复咨询问题进行人工咨询，我们在工作日将安排专人跟进您 的咨询建议。</p>-->
 </article>

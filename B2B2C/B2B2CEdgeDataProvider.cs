@@ -31,12 +31,14 @@ public class Startup
         DateTime startDate, endDate;
         if (!DateTime.TryParse(start, out startDate))
         {
-            startDate = DateTime.Now.Subtract(TimeSpan.FromDays(30));
+            startDate = DateTime.UtcNow.Subtract(TimeSpan.FromDays(30));
         }
+        startDate = startDate.AddHours(8);
         if (!DateTime.TryParse(end, out endDate))
         {
-            endDate = DateTime.Now;
+            endDate = DateTime.UtcNow;
         }
+        endDate = endDate.AddHours(8);
 
         return await Helper.Query(criterion, startDate, endDate);
     }
@@ -44,9 +46,9 @@ public class Startup
 
 static class Helper
 {
-    static string bbcConnString = "Data Source=10.53.1.194/ZNHG;User ID=kjecsel;Password=kjecsel;";
+    static string bbcConnString = "Data Source=172.7.1.243/ZNHG;User ID=kjecsel;Password=kjecsel;";
+    static string bcConnString = "Data Source=172.7.1.243/ZNHG;User ID=gzhg;Password=gzhg;";
 
-    static string bcConnString = "Data Source=10.53.1.194/ZNHG;User ID=gzhg;Password=gzhg;";
     public static async Task<TaxBill[]> Query(string criterion, DateTime startDate, DateTime endDate)
     {
         var bbcBillsTask = QueryBBC(criterion, startDate, endDate);
