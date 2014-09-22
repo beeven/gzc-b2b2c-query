@@ -26,9 +26,11 @@ angular.module("GZCApp", [
     .controller('mainController', ['$scope', 'queryService',
         function ($scope, queryService) {
             var today = new Date();
+            today.setUTCHours(today.getHours());
+
             $scope.queryData = {
                 phoneOrName: '',
-                startDate: new Date(today.setMonth(today.getMonth() - 1)),
+                startDate: new Date(angular.copy(today).setMonth(today.getMonth() - 1)),
                 endDate: new Date()
             };
             $scope.resultDataList = [];
@@ -61,7 +63,7 @@ angular.module("GZCApp", [
                     start: $scope.queryData.startDate,
                     end: $scope.queryData.endDate
                 }, function (result) {
-                    console.log(result)
+                    console.log(result);
                     if (result.length > 0) {
                         $scope.ListDataStatus = 'none'
                     } else {
