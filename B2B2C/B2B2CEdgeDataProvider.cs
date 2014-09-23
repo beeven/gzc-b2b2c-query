@@ -67,7 +67,7 @@ static class Helper
             await dbcon.OpenAsync();
             OracleCommand dbcmd = dbcon.CreateCommand();
             string sql = "select ORDERDOCID as \"receiver_id\", " +
-                     "CHILDORDERNO as \"order_id\", " +
+                     "ORDERID as \"order_id\", " +
                      "TRANSPORT_NO as \"freight_id\", " +
                      "HANDLE_DATE as \"last_updated\", " +
                      "EBSTATUS as \"status\", " +
