@@ -62,7 +62,7 @@ angular.module("GZCApp", [
                     end: $scope.queryData.endDate
                 }, function (result) {
                     //console.log(result)
-                    if (result.length > 0) {
+                    if (result.length <= 0) {
                         $scope.ListDataStatus = 'none'
                     } else {
                         $scope.ListDataStatus = 'done'

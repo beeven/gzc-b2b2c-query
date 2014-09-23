@@ -19,9 +19,9 @@ angular.module('main.module', ['common.service.module'])
                 $scope.ListDataStatus = 'loading';
                 queryService.query({id: $scope.queryData.phoneOrName}, function (result) {
                     if (result.length > 0) {
-                        $scope.ListDataStatus = 'none'
-                    } else {
                         $scope.ListDataStatus = 'done'
+                    } else {
+                        $scope.ListDataStatus = 'none'
                     }
                     $scope.resultDataList = result;
                 });
