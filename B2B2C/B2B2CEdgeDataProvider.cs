@@ -76,6 +76,7 @@ static class Helper
                      "TAX_NUMBER as \"tax_bill_id\" " +
                      "from KJECCUS.V_EBILL_FOR_WECHAT " +
                      "where ORDERDOCID = :criterion " +
+                     "and LIST_NO is not NULL " +
                      "and ( HANDLE_DATE is null or HANDLE_DATE between :startDate and :endDate )" +
                      "order by HANDLE_DATE desc";
             dbcmd.CommandText = sql;
