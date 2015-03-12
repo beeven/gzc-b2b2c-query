@@ -99,7 +99,6 @@ angular.module("GZCApp", [
         $scope.open = function($event, which) {
             $event.preventDefault();
             $event.stopPropagation();
-            console.log(which,"pressed");
             if(which == 'start') {
                 $scope.startDateOpen = true;
             } else {
@@ -109,6 +108,9 @@ angular.module("GZCApp", [
         $scope.results = [];
 
         $scope.query = function() {
+            if(!$scope.idNum) {
+                return;
+            }
             $scope.loadStatus = 'loading';
             queryService.query({
                 id: $scope.idNum,

@@ -12,7 +12,6 @@
 				style: "@spinner"
 			},
 			controller: function($scope, $element, $attrs) {
-				console.log($scope.style);
 			}
 		};
 	})
