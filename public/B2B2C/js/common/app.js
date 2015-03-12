@@ -7,23 +7,36 @@
 angular.module("GZCApp", [
     "ngResource",
     "ngRoute",
+    "ngDeviceDetector",
     "ui.bootstrap.accordion"
     /*"ui.bootstrap"*/
 ])
     .config(['$routeProvider',
         function ($routeProvider) {
-            $routeProvider.when('/input', {
-                templateUrl: 'partials/main.html',
-                controller: 'mainController'
+            $routeProvider.when('/mobile', {
+                templateUrl: 'partials/mobile_main.html',
+                controller: 'mobileMainCtrl'
             })
-            /*$routeProvider.when('/result', {
-             templateUrl: 'partials/dataList.html',
-             controller: 'resultController'
-             })*/
-            $routeProvider.otherwise({ redirectTo: '/input' });
+            .when("/desktop", {
+                templateurl, 'partials/desktop_main.html',
+                controller: "desktopMainCtrl"
+            })
+            .when("/",{
+                template:"<div></div>",
+                controller: "deviceDetectCtrl"
+            })
+            $routeProvider.otherwise({ redirectTo: '/' });
         }])
 
-    .controller('mainController', ['$scope', 'queryService',
+    .controller("deviceDetectCtrl",['$location','deviceDetector',function($location,deviceDetector){
+        if(deviceDetector.isMobile() && !deviceDetector.isTablet()) {
+            $location.path("/mobile")
+        } else {
+            $location.path("/desktop")
+        }
+    }])
+
+    .controller('mobileMainCtrl', ['$scope', 'queryService',
         function ($scope, queryService) {
             var today = new Date();
             $scope.queryData = {
@@ -73,6 +86,92 @@ angular.module("GZCApp", [
             //$scope.query();
         }
     ])
+    .controller("desktopMainCtrl",["$scope",'queryService',function($scope,queryService){
+        $scope.maxDate = new Date();
+        $scope.minDate = new Date($scope.maxDate - 1000*3600*24*30);
+        $scope.startDate = $scope.minDate;
+        $scope.endDate = $scope.maxDate;
+        $scope.format = 'yyyy-MM-dd'
+        $scope.startDateOpen = false;
+        $scope.endDateOpen = false;
+
+        $scope.open = function($event, which) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            console.log(which,"pressed");
+            if(which == 'start') {
+                $scope.startDateOpen = true;
+            } else {
+                $scope.endDateOpen = true;
+            }
+        }
+
+        $scope.query = function() {
+            queryService.query({
+                id: $scope.idNum,
+                start: $scope.startDate,
+                end: $scope.endDate
+            }, function(results){
+                $scope.results = flatten(results);
+            })
+        }
+
+        function flatten(results) {
+            var ret = [];
+            var index = 0;
+            var rowindex = 0;
+            for(index=0;index<results.length;index++) {
+                ret.push({
+                    tax_bill_id: results[index].tax_bill_id,
+                    tax_total: results[index].tax_total,
+                    rows : results[index].orders.length,
+                    order_id: results[index].orders[0].order_id,
+                    status: results[index].orders[0].status,
+                    freight_id:results[index].orders[0].freight_id,
+                    last_updated: results[index].orders[0].last_updated
+                });
+                if(results[index].orders.length > 1) {
+                    for(rowindex=1; rowindex < results[index].orders.length; rowindex++) {
+                        ret.push({
+                            order_id: results[index].orders[rowindex].order_id,
+                            status: results[index].orders[rowindex].status,
+                            freight_id: results[index].orders[rowindex].freight_id,
+                            last_updated: results[index].orders[rowindex].last_updated
+                        })
+                    }
+                }
+            }
+            return ret;
+        }
+
+        var testData = [
+            {
+                tax_bill_id:"123456", tax_total:"53",orders:[
+                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"},
+                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"},
+                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"}
+            ]},
+            {
+                tax_bill_id:"12345678", tax_total:"53",orders:[
+                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"},
+                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"}
+            ]},
+            {
+                tax_bill_id:"12345678", tax_total:"53",orders:[
+                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"}
+            ]},
+            {
+                tax_bill_id:"123456", tax_total:"53",orders:[
+                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"},
+                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"},
+                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"},
+                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"},
+                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"}
+            ]},
+        ];
+
+        $scope.results = flatten(testData);
+    }])
 
     .directive('fixedTopNavBar', [
         function () {
