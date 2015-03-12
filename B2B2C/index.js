@@ -4,7 +4,8 @@
 var express = require("express"),
     app = express.Router();
 
-var dataProvider = require("./B2B2CEdgeDataProvider");
+//var dataProvider = require("./B2B2CEdgeDataProvider");
+var dataProvider = require("./ServiceDataProvider");
 
 // query format: api/query/:id?start=2014-09-02&end=2014-09-03
 // id: 身份证号/姓名
@@ -21,8 +22,8 @@ app.get("/api/query/:id", function (req, res) {
         .then(function (data) {
             res.json(data);
         })
-        .fail(function (err) {
-            res.send(500);
+        .catch(function (err) {
+            res.status(500).end();
             console.error(err);
         });
 });

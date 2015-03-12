@@ -46,8 +46,8 @@ public class Startup
 
 static class Helper
 {
-    static string bbcConnString = "Data Source=172.7.1.243/ZNHG;User ID=kjecsel;Password=kjecsel;";
-    static string bcConnString = "Data Source=172.7.1.243/ZNHG;User ID=gzhg;Password=gzhg;";
+    static string bbcConnString = "Data Source=10.53.1.194/ZNHG;User ID=kjecsel;Password=kjecsel;";
+    static string bcConnString = "Data Source=10.53.1.194/ZNHG;User ID=gzhg;Password=gzhg;";
 
     public static async Task<TaxBill[]> Query(string criterion, DateTime startDate, DateTime endDate)
     {
@@ -124,6 +124,7 @@ static class Helper
             }
             reader.Close();
             dbcmd.Dispose();
+            dbcon.Close();
         }
 
         foreach (var tb in groups.Values)
@@ -204,6 +205,7 @@ static class Helper
             }
             reader.Close();
             dbcmd.Dispose();
+            dbcon.Close();
         }
 
         foreach (var tb in groups.Values)
