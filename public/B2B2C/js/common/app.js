@@ -8,7 +8,8 @@ angular.module("GZCApp", [
     "ngResource",
     "ngRoute",
     "ngDeviceDetector",
-    "ui.bootstrap"
+    "ui.bootstrap",
+    "spinner"
 ])
     .config(['$routeProvider',
         function ($routeProvider) {
@@ -93,6 +94,7 @@ angular.module("GZCApp", [
         $scope.format = 'yyyy-MM-dd'
         $scope.startDateOpen = false;
         $scope.endDateOpen = false;
+        $scope.idNum = null;
 
         $scope.open = function($event, which) {
             $event.preventDefault();
@@ -104,14 +106,22 @@ angular.module("GZCApp", [
                 $scope.endDateOpen = true;
             }
         }
+        $scope.results = [];
 
         $scope.query = function() {
+            $scope.loadStatus = 'loading';
             queryService.query({
                 id: $scope.idNum,
                 start: $scope.startDate,
                 end: $scope.endDate
             }, function(results){
-                $scope.results = flatten(results);
+                if(results.length > 0) {
+                    $scope.results = flatten(results);
+                    $scope.loadStatus = 'done';
+                } else {
+                    $scope.results = [];
+                    $scope.loadStatus = 'none';
+                }
             })
         }
 
@@ -142,34 +152,6 @@ angular.module("GZCApp", [
             }
             return ret;
         }
-
-        var testData = [
-            {
-                tax_bill_id:"123456", tax_total:"53",orders:[
-                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"},
-                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"},
-                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"}
-            ]},
-            {
-                tax_bill_id:"12345678", tax_total:"53",orders:[
-                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"},
-                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"}
-            ]},
-            {
-                tax_bill_id:"12345678", tax_total:"53",orders:[
-                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"}
-            ]},
-            {
-                tax_bill_id:"123456", tax_total:"53",orders:[
-                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"},
-                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"},
-                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"},
-                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"},
-                {order_id:"123",status:"released",freight_id:"12345",last_updated:"2013-12-12"}
-            ]},
-        ];
-
-        $scope.results = flatten(testData);
     }])
 
     .directive('fixedTopNavBar', [

@@ -1,3 +1,18 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+.view {
+  height: 100%;
+}
+.desktop {
+  min-height: 100%;
+  position: relative;
+  height: auto !important;
+  height: 100%;
+}
 .desktop button,
 .desktop input {
   border-radius: 2px;
@@ -39,6 +54,9 @@
 .desktop-filter button {
   margin-left: 10px;
 }
+.desktop-result {
+  padding-bottom: 40px;
+}
 .desktop-result .content {
   width: 800px;
   margin-left: auto;
@@ -57,4 +75,103 @@
   text-align: center;
   background-color: #3a518e;
   color: #fff;
+}
+.desktop-footer {
+  clear: both;
+  height: 40px;
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  padding-top: 10px;
+  background: #6274a4; /* Old browsers */
+  background: -moz-linear-gradient(top, #6274a4 0%, #1f3a80 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #6274a4), color-stop(100%, #1f3a80));
+  background: -webkit-linear-gradient(top, #6274a4 0%, #1f3a80 100%);
+  background: -o-linear-gradient(top, #6274a4 0%, #1f3a80 100%);
+  background: -ms-linear-gradient(top, #6274a4 0%, #1f3a80 100%);
+  background: linear-gradient(to bottom, #6274a4 0%, #1f3a80 100%);
+}
+.spinner {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+}
+.spinner .cube {
+  width: 33.333333333333336%;
+  height: 33.333333333333336%;
+  background-color: #3a518e;
+  float: left;
+  animation: scaleDelay 1300ms infinite ease-in-out;
+  -webkit-animation: scaleDelay 1300ms infinite ease-in-out;
+}
+.spinner .cube:nth-child(1) {
+  animation-delay: 200ms;
+  -webkit-animation-delay: 200ms;
+}
+.spinner .cube:nth-child(2) {
+  animation-delay: 300ms;
+  -webkit-animation-delay: 300ms;
+}
+.spinner .cube:nth-child(3) {
+  animation-delay: 400ms;
+  -webkit-animation-delay: 400ms;
+}
+.spinner .cube:nth-child(4) {
+  animation-delay: 100ms;
+  -webkit-animation-delay: 100ms;
+}
+.spinner .cube:nth-child(5) {
+  animation-delay: 200ms;
+  -webkit-animation-delay: 200ms;
+}
+.spinner .cube:nth-child(6) {
+  animation-delay: 300ms;
+  -webkit-animation-delay: 300ms;
+}
+.spinner .cube:nth-child(7) {
+  animation-delay: 0ms;
+  -webkit-animation-delay: 0ms;
+}
+.spinner .cube:nth-child(8) {
+  animation-delay: 100ms;
+  -webkit-animation-delay: 100ms;
+}
+.spinner .cube:nth-child(9) {
+  animation-delay: 200ms;
+  -webkit-animation-delay: 200ms;
+}
+@-moz-keyframes scaleDelay {
+  0%, 70%, 100% {
+    transform: scale3D(1, 1, 1);
+  }
+  35% {
+    transform: scale3D(0, 0, 1);
+  }
+}
+@-webkit-keyframes scaleDelay {
+  0%, 70%, 100% {
+    transform: scale3D(1, 1, 1);
+  }
+  35% {
+    transform: scale3D(0, 0, 1);
+  }
+}
+@-o-keyframes scaleDelay {
+  0%, 70%, 100% {
+    transform: scale3D(1, 1, 1);
+  }
+  35% {
+    transform: scale3D(0, 0, 1);
+  }
+}
+@keyframes scaleDelay {
+  0%, 70%, 100% {
+    transform: scale3D(1, 1, 1);
+  }
+  35% {
+    transform: scale3D(0, 0, 1);
+  }
 }
