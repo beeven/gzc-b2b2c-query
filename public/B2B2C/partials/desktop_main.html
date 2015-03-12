@@ -34,7 +34,7 @@
 			</span>
 		</p>
 	</div>
-	<button class="btn btn-primary" type="submit">查 询</button>
+	<button class="btn btn-primary" type="submit" ng-click="query()">查 询</button>
 </form>
 </div>
 </div>
@@ -57,7 +57,7 @@
 					<td ng-if="!!item.rows" rowspan="{{item.rows}}" class="td-center">{{item.tax_total | currency: '￥'}}</td>
 					<td>{{item.order_id}}</td>
 					<td>{{item.freight_id}}</td>
-					<td>{{item.last_updated}}</td>
+					<td>{{item.last_updated | date: 'yyyy-MM-dd'}}</td>
 					<td class="td-bold">{{item.status}}</td>
 				</tr>
 					

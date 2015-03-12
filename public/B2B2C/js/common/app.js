@@ -8,8 +8,7 @@ angular.module("GZCApp", [
     "ngResource",
     "ngRoute",
     "ngDeviceDetector",
-    "ui.bootstrap.accordion"
-    /*"ui.bootstrap"*/
+    "ui.bootstrap"
 ])
     .config(['$routeProvider',
         function ($routeProvider) {
@@ -18,7 +17,7 @@ angular.module("GZCApp", [
                 controller: 'mobileMainCtrl'
             })
             .when("/desktop", {
-                templateurl, 'partials/desktop_main.html',
+                templateUrl: 'partials/desktop_main.html',
                 controller: "desktopMainCtrl"
             })
             .when("/",{
