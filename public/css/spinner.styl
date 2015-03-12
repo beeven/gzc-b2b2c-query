@@ -1,0 +1,35 @@
+
+
+rows = 3
+tilecolor = !!themecolor ? themecolor : #333
+
+
+.spinner
+    width 40px
+    height 40px
+    margin 0 auto
+
+.spinner .cube
+    width (100 / rows)%
+    height (100 / rows)%
+    background-color tilecolor
+    float left
+    animation scaleDelay (2 * rows - 2) * 100ms + 900ms infinite ease-in-out
+    -webkit-animation scaleDelay (2 * rows - 2) * 100ms + 900ms infinite ease-in-out
+
+
+@keyframes scaleDelay {
+    0%, 70%, 100% { 
+        transform: scale3D(1.0, 1.0, 1.0);
+    }
+    35% {
+        transform: scale3D(0.0,0.0,1.0);
+    }
+}
+    
+
+for i in (0 ... rows)
+    for j in (0 ... rows)
+        .spinner .cube:nth-child({ i * rows + j + 1})
+            animation-delay: ( rows - i + j - 1 ) * 100ms
+            -webkit-animation-delay: (rows - i + j - 1) * 100ms

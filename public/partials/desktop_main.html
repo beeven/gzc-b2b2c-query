@@ -1,0 +1,79 @@
+<div class="desktop" ng-controller="desktopMainCtrl">
+	<div ng-show="isMobile">
+		<a href="/mobile">Switch to mobile version</a>
+	</div>
+<div class="desktop-header">
+	<div class="banner">
+		<img src="images/logo.png" alt="">
+		<span>广州海关跨境个人电子税单查询</span>
+	</div>
+</div>
+<div class="container-fluid desktop-filter">
+<div class="content">
+<form class="form-inline">
+	<div class="form-group">
+		<label for="inputID">身份证号</label>
+		<input type="text" placeholder="输入身份证号" class="form-control" id="inputID" ng-model="idNum" ng-maxlength="18" ng-pattern="/^[0-9A-Za-z]{1,19}$/">
+	</div>
+	<div class="form-group">
+		<label for="inputStartDate">开始日期</label>
+		<p class="input-group">
+			<input type="date" class="form-control" id="inputStartDate" datepicker-popup="yyyy-MM-dd" ng-model="startDate" max-date="maxDate" min-date="minDate" ng-required="true" is-open="startDateOpen">
+		<span class="input-group-btn">
+			<button class="btn btn-default" ng-click="open($event,'start')"><i class="glyphicon glyphicon-calendar"></i></button>
+		</span>
+		</p>
+		
+	</div>
+	<div class="form-group">
+		<label for="inputEndDate">结束日期</label>
+		<p class="input-group">
+			<input type="date" class="form-control" id="inputEndDate" datepicker-popup="yyyy-MM-dd" ng-model="endDate" max-date="maxDate" min-date="minDate" ng-required="true" is-open="endDateOpen">
+			<span class="input-group-btn">
+				<button class="btn btn-default" ng-click="open($event,'end')"><i class="glyphicon glyphicon-calendar"></i></button>
+			</span>
+		</p>
+	</div>
+	<button class="btn btn-primary query" type="submit" ng-click="query()">查 询</button>
+</form>
+</div>
+</div>
+
+<div class="desktop-result">
+	<div class="content" ng-show="loadStatus == 'done'">
+		<table class="table table-bordered result-table">
+			<thead>
+				<tr>
+					<th>税单号</th>
+					<th>征税额</th>
+					<th>订单号</th>
+					<th>货运号</th>
+					<th>最新处理时间</th>
+					<th>状态</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in results">
+					<td ng-if="!!item.rows" rowspan="{{item.rows}}" class="td-center">{{item.tax_bill_id}}</td>
+					<td ng-if="!!item.rows" rowspan="{{item.rows}}" class="td-center">{{item.tax_total | currency: '￥'}}</td>
+					<td>{{item.order_id}}</td>
+					<td>{{item.freight_id}}</td>
+					<td>{{item.last_updated | date: 'yyyy-MM-dd'}}</td>
+					<td class="td-bold">{{item.status}}</td>
+				</tr>
+					
+			</tbody>
+		</table>
+	</div>
+	<div class="content" ng-show="loadStatus == 'none'">
+		<span>没有找到数据</span>
+	</div>
+	<div class="content" ng-if="loadStatus == 'loading'">
+		<div spinner="cube"></div>
+	</div>
+</div>
+<div class="desktop-footer">
+	 <p class="">
+    本服务由广州海关12360提供，仅供查询在广州海关通关的跨境个人税单。</p>
+</div>
+</div>

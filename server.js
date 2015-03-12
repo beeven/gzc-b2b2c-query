@@ -8,7 +8,9 @@ var express = require("express"),
 
 var bbc = require("./B2B2C");
 
-app.set('port', process.env.PORT || 3010);
+app.set('port', process.env.PORT || 3000);
+
+//app.use(express.static(__dirname+"/public"));
 
 app.use("/",bbc.routes);
 
