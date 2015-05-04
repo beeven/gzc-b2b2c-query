@@ -18,7 +18,7 @@
 	<div class="form-group">
 		<label for="inputStartDate">开始日期</label>
 		<p class="input-group">
-			<input type="date" class="form-control" id="inputStartDate" datepicker-popup="yyyy-MM-dd" ng-model="startDate" max-date="maxDate" min-date="minDate" ng-required="true" is-open="startDateOpen">
+			<input type="text" class="form-control" id="inputStartDate" datepicker-popup="yyyy-MM-dd" ng-model="startDate" max-date="maxDate" min-date="minDate" ng-required="true" is-open="startDateOpen">
 		<span class="input-group-btn">
 			<button class="btn btn-default" ng-click="open($event,'start')"><i class="glyphicon glyphicon-calendar"></i></button>
 		</span>
@@ -28,7 +28,7 @@
 	<div class="form-group">
 		<label for="inputEndDate">结束日期</label>
 		<p class="input-group">
-			<input type="date" class="form-control" id="inputEndDate" datepicker-popup="yyyy-MM-dd" ng-model="endDate" max-date="maxDate" min-date="minDate" ng-required="true" is-open="endDateOpen">
+			<input type="text" class="form-control" id="inputEndDate" datepicker-popup="yyyy-MM-dd" ng-model="endDate" max-date="maxDate" min-date="minDate" ng-required="true" is-open="endDateOpen">
 			<span class="input-group-btn">
 				<button class="btn btn-default" ng-click="open($event,'end')"><i class="glyphicon glyphicon-calendar"></i></button>
 			</span>
