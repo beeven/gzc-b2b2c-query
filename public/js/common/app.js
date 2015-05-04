@@ -39,11 +39,10 @@ angular.module("GZCApp", [
     .controller('mobileMainCtrl', ['$scope', 'queryService',
         function ($scope, queryService) {
             var today = new Date();
-            $scope.queryData = {
-                phoneOrName: '',
-                startDate: new Date(today.getTime() - 30*24*3600*1000),
-                endDate: new Date()
-            };
+            $scope. phoneOrName= '';
+            $scope.startDate= new Date(today.getTime() - 30*24*3600*1000);
+            $scope.endDate= new Date();
+            
             $scope.resultDataList = [];
             $scope.ListDataStatus = 'loading';
             $scope.showList = false;
@@ -70,9 +69,9 @@ angular.module("GZCApp", [
                 $scope.showList = true;
                 $scope.ListDataStatus = 'loading';
                 queryService.query({
-                    id: $scope.queryData.phoneOrName,
-                    start: $scope.queryData.startDate,
-                    end: $scope.queryData.endDate
+                    id: $scope.phoneOrName,
+                    start: $scope.startDate,
+                    end: $scope.endDate
                 }, function (result) {
                     //console.log(result)
                     if (result.length <= 0) {
@@ -88,7 +87,7 @@ angular.module("GZCApp", [
     ])
     .controller("desktopMainCtrl",["$scope",'queryService',function($scope,queryService){
         $scope.maxDate = new Date();
-        $scope.minDate = new Date($scope.maxDate - 1000*3600*24*30);
+        $scope.minDate = new Date($scope.maxDate - 1000*3600*24*90);
         $scope.startDate = $scope.minDate;
         $scope.endDate = $scope.maxDate;
         $scope.format = 'yyyy-MM-dd'

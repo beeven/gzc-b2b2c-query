@@ -8,19 +8,19 @@
 </div>
 <div class="card">
     <div class="card-content p10">
-        <form name="queryForm"  ng-submit="query()">
+        <form name="queryForm" ng-model="queryData" ng-submit="query()">
             <div class="input-group mb5">
                 <span class="input-group-addon">开始日期</span>
-                <input type="date" class="form-control flat-input" ng-model="startDate" required/>
+                <input type="date" class="form-control flat-input" ng-model="queryData.startDate" required/>
             </div>
             <div class="input-group mb5">
                 <span class="input-group-addon">结束日期</span>
-                <input type="date" class="form-control flat-input" ng-model="endDate" required/>
+                <input type="date" class="form-control flat-input" ng-model="queryData.endDate" required/>
             </div>
             <div class="input-group mb5">
                 <input type="text" class="form-control flat-input input-lg mb5" name="phoneOrName"
                        ng-class="{'input-err':(queryForm.phoneOrName.$dirty&&queryForm.$invalid)}"
-                       ng-model="phoneOrName" ng-maxlength="18"
+                       ng-model="queryData.phoneOrName" ng-maxlength="18"
                        ng-pattern="/^[0-9A-Za-z]{0,19}$/"
                        placeholder="请输入身份证号" required/>
                 <span class="input-group-btn">
