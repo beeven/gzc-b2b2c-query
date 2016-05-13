@@ -20,7 +20,7 @@ app.get("/api/query/:id", function (req, res) {
 
     dataProvider.query(id, startDate, endDate)
         .then(function (data) {
-            res.json(data);
+            res.jsonp(data);
         })
         .catch(function (err) {
             res.status(500).end();

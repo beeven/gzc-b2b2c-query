@@ -2,9 +2,10 @@
   "name": "gzc-b2b2c-query",
   "version": "0.1.1",
   "dependencies": {
-    "edge": "^0.10.1",
-    "express": "^4.12.3",
-    "q": "^1.3.0"
+    "bluebird": "^3.2.1",
+    "express": "^4.13.3",
+    "q": "^1.4.1",
+    "request": "^2.69.0"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
